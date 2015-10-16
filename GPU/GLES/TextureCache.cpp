@@ -1092,8 +1092,9 @@ void TextureCache::ApplyTextureFramebuffer(TexCacheEntry *entry, VirtualFramebuf
 
 		glUseProgram(depal->program);
 
-		glstate.arrayBuffer.unbind();
-		glstate.elementArrayBuffer.unbind();
+		// Restore will rebind all of the state below.
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 		glEnableVertexAttribArray(depal->a_position);
 		glEnableVertexAttribArray(depal->a_texcoord0);
 
@@ -1410,6 +1411,8 @@ void TextureCache::SetTexture(bool force) {
 
 	if ((bufw == 0 || (gstate.texbufwidth[0] & 0xf800) != 0) && texaddr >= PSP_GetKernelMemoryEnd()) {
 		ERROR_LOG_REPORT(G3D, "Texture with unexpected bufw (full=%d)", gstate.texbufwidth[0] & 0xffff);
+		// Proceeding here can cause a crash.
+		return;
 	}
 
 	// We have to decode it, let's setup the cache entry first.

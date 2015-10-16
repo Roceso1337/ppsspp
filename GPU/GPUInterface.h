@@ -24,6 +24,7 @@
 #include "GPU/GPU.h"
 #include "Core/MemMap.h"
 #include "GPU/ge_constants.h"
+#include "GPU/Common/ShaderCommon.h"
 
 struct PspGeListArgs;
 struct GPUgstate;
@@ -140,6 +141,8 @@ struct DisplayList {
 	u32 offsetAddr;
 	bool bboxResult;
 	u32 stackAddr;
+
+	u32 padding;  // Android x86-32 does not round the structure size up to the closest multiple of 8 like the other platforms.
 };
 
 enum GPUInvalidationType {
@@ -283,4 +286,8 @@ public:
 	virtual const std::list<int>& GetDisplayLists() = 0;
 	virtual bool DecodeTexture(u8* dest, const GPUgstate &state) = 0;
 	virtual std::vector<FramebufferInfo> GetFramebufferList() = 0;
+
+	// For debugging. The IDs returned are opaque, do not poke in them or display them in any way.
+	virtual std::vector<std::string> DebugGetShaderIDs(DebugShaderType type) = 0;
+	virtual std::string DebugGetShaderString(std::string id, DebugShaderType type, DebugShaderStringType stringType) = 0;
 };

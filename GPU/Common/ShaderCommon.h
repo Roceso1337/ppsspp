@@ -1,4 +1,4 @@
-// Copyright (c) 2012- PPSSPP Project.
+// Copyright (c) 2015- PPSSPP Project.
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,6 +17,13 @@
 
 #pragma once
 
-#include "Core/MIPS/MIPS.h"
+enum DebugShaderType {
+	SHADER_TYPE_VERTEX = 0,
+	SHADER_TYPE_FRAGMENT = 1,
+};
 
-// Runtime generated assembly routines, like the Dispatcher.
+enum DebugShaderStringType {
+	SHADER_STRING_SHORT_DESC = 0,
+	SHADER_STRING_SOURCE_CODE = 1,
+	SHADER_STRING_STATS = 2,
+};
