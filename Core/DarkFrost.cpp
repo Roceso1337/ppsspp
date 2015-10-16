@@ -53,3 +53,8 @@ unsigned char DarkFrostEngine::getASCII(unsigned int value, unsigned int byte)
 	if((val<=0x20) || (val==0xFF)) val='.';
 	return val;
 }
+
+void DarkFrostEngine::extSearch(unsigned int value, int size)
+{
+	//value = Memory::Read_U32(addr);
+}

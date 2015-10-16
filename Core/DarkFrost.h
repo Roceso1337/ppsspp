@@ -27,6 +27,8 @@ class DarkFrostEngine
 
 		unsigned char getASCII(unsigned int, unsigned int);
 
+		void extSearch(unsigned int, int);
+
 		//VARIABLES
 		std::string gameDir="ms0:/darkfrost/codes/__________.txt";
 		std::string gameId;//length of 10

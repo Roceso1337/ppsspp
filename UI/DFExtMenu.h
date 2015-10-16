@@ -36,6 +36,8 @@ public:
 
 	UI::EventReturn OnAddressPrompt(UI::EventParams &params);
 
+	UI::EventReturn OnSearch(UI::EventParams &params);
+
 protected:
 	virtual void CreateViews();
 };

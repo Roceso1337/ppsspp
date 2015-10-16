@@ -77,7 +77,7 @@ void DFExtMenu::CreateViews() {
 			content->Add(new ItemHeader(em->T("Extra Menu")));//Cheat name
 			content->Add(new TextView(em->T("Extra Menu #1")));
 			break;
-		case 1://EXACT SEARCH
+		case 1://EXT SEARCH
 			content->Add(new ItemHeader(em->T("Exact Search")));
 			//prompt for the value
 			if(!refreshed)
@@ -93,18 +93,25 @@ void DFExtMenu::CreateViews() {
 				*((unsigned char*)&exactValue), *((unsigned char*)&exactValue+1),
 				*((unsigned char*)&exactValue+2), *((unsigned char*)&exactValue+3));
 			content->Add(new TextView(em->T(buffer)));
+			content->Add(new Choice(em->T("Search")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
 			break;
 		case 2://DIFF SEARCH 8 BIT
 			content->Add(new ItemHeader(em->T("Unknown Value 8 Bit")));
-			content->Add(new TextView(em->T("Extra Menu #2")));
+			content->Add(new Choice(em->T("0=Same")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
+			content->Add(new Choice(em->T("1=Different")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
+			content->Add(new Choice(em->T("2=Greater")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
+			content->Add(new Choice(em->T("3=Less")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
+			//content->Add(new Choice(em->T("4=Inc by")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
+			//content->Add(new Choice(em->T("5=Dec by")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
+			content->Add(new Choice(em->T("Search")))->OnClick.Handle(this, &DFExtMenu::OnSearch);
 			break;
 		case 3://DIFF SEARCH 16 BIT
 			content->Add(new ItemHeader(em->T("Unknown Value 16 Bit")));
-			content->Add(new TextView(em->T("Extra Menu #1")));
+			content->Add(new TextView(em->T("Extra Menu #3")));
 			break;
 		case 4://DIFF SEARCH 32 BIT
 			content->Add(new ItemHeader(em->T("Unknown Value 32 Bit")));
-			content->Add(new TextView(em->T("Extra Menu #2")));
+			content->Add(new TextView(em->T("Extra Menu #4")));
 			break;
 		default://invalid
 			content->Add(new ItemHeader(em->T("Extra Menu")));
@@ -119,13 +126,28 @@ void DFExtMenu::CreateViews() {
 }
 
 UI::EventReturn DFExtMenu::OnAddressPrompt(UI::EventParams &params) {
-	//nothing yet
 	unsigned int oldValue=exactValue;
 	exactValue=params.a;
 	if(exactValue != oldValue)
 	{
 		refreshed=true;
 		CreateViews();
+	}
+	return UI::EVENT_DONE;
+}
+
+UI::EventReturn DFExtMenu::OnSearch(UI::EventParams &params) {
+	//nothing yet
+	switch(extMenu)
+	{
+		case 1://EXT SEARCH
+			break;
+		case 2:////DIFF SEARCH 8 BIT
+			break;
+		case 3://DIFF SEARCH 16 BIT
+			break;
+		case 4://DIFF SEARCH 32 BIT
+			break;
 	}
 	return UI::EVENT_DONE;
 }
