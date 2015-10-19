@@ -24,6 +24,8 @@ DarkFrostEngine::DarkFrostEngine()
 	cheatsEnabled=false;
 	realAddressing=false;
 	valueFormat=0;
+	ramAddress=0x08800000;
+	decoderAddress=0x08800000;
 }
 
 void DarkFrostEngine::setEngine(DarkFrostEngine *nDarkFrostEngine)

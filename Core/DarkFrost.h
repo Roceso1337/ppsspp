@@ -35,4 +35,6 @@ class DarkFrostEngine
 		bool cheatsEnabled;
 		bool realAddressing;
 		int valueFormat;
+		unsigned int ramAddress;
+		unsigned int decoderAddress;
 };

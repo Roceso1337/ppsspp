@@ -130,6 +130,18 @@ void DarkFrostScreen::CreateViews() {
 	//DECODER CONTENT
 	decoderContent->Add(new ItemHeader(de->T("Decoder")));
 
+	/*for(int i=0;i<16;++i)
+	{
+		char buffer[64];
+		unsigned int dAddr=darkFrostEngine->decoderAddress;
+		unsigned int dVal=Memory::Read_U32(dAddr+(i*4));
+		sprintf(buffer, "0x%08lX 0x%08lX  %010u  %c%c%c%c", dAddr+(i*4), dVal, dVal,
+				*((unsigned char*)&dVal), *((unsigned char*)&dVal+1),
+				*((unsigned char*)&dVal+2), *((unsigned char*)&dVal+3));
+		decoderContent->Add(new TextView(de->T(buffer)));
+		if(dAddr+(i*4) == 0x017FFFFC+0x08800000)
+	}*/
+
 	//ABOUT
 	ViewGroup *aboutScroll = new ScrollView(ORIENT_VERTICAL, new LinearLayoutParams(FILL_PARENT, FILL_PARENT));//aboutScroll=rightColumn
 	LinearLayout *aboutContent = new LinearLayout(ORIENT_VERTICAL);
